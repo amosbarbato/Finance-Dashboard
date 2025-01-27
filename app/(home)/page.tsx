@@ -1,6 +1,7 @@
-import { UserButton } from "@clerk/nextjs"
-import { auth } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
+import { auth } from "@clerk/nextjs/server"
+import SidebarDashboard from "../_components/sidebar"
+import { SidebarProvider } from "../_components/ui/sidebar"
 
 const Home = async () => {
   const { userId } = await auth()
@@ -10,11 +11,13 @@ const Home = async () => {
   }
 
   return (
-    <>
-      <h1>Deu certo</h1>
+    <SidebarProvider>
+      <SidebarDashboard />
 
-      <UserButton showName />
-    </>
+      <main className="bg-gray-100 w-full">
+        <h1>Deu certo</h1>
+      </main>
+    </SidebarProvider>
   )
 }
 
