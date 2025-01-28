@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Mulish } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { SidebarProvider } from "./_components/ui/sidebar";
+import SidebarDashboard from "./_components/sidebar";
 
 const mulish = Mulish({
   subsets: ["latin-ext"],
@@ -21,7 +23,11 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${mulish.className} antialiased`} >
-          {children}
+          <SidebarProvider>
+            <SidebarDashboard />
+
+            <main className="bg-gray-100 w-full p-8">{children}</main>
+          </SidebarProvider>
         </body>
       </html>
     </ClerkProvider>
