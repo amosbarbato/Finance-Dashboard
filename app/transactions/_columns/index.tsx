@@ -4,6 +4,8 @@ import { TRANSACTION_CATEGORY_LABELS, TRANSACTION_PAYMENT_METHOD_LABELS } from '
 import { Transaction } from '@prisma/client'
 import { ColumnDef } from "@tanstack/react-table"
 import TypeBadge from '../_components/type-badge'
+import EditTransaction from '../_components/edit-transaction'
+import DeleteTransaction from '../_components/delete-transaction'
 
 export const transactionColumns: ColumnDef<Transaction>[] = [
   {
@@ -48,4 +50,16 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
         currency: "BRL",
       }).format(Number(transaction.amount)),
   },
+  {
+    accessorKey: "actions",
+    header: "",
+    cell: ({ row: { original: transaction } }) => {
+      return (
+        <div className="w-full flex justify-evenly">
+          <EditTransaction transaction={transaction} />
+          <DeleteTransaction transactionId={transaction.id} />
+        </div>
+      );
+    },
+  }
 ]
