@@ -12,7 +12,7 @@ const AddTransaction = () => {
     <>
       <Button
         variant="outline"
-        className="rounded-full"
+        className="rounded-full border-primary"
         onClick={() => setDialogIsOpen(true)}
       >
         <PlusIcon />

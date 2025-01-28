@@ -58,7 +58,9 @@ const SidebarDashboard = () => {
               size="lg"
               variant={pathname === "/" ? "default" : "ghost"}
             >
-              <LayoutDashboardIcon />
+              <LayoutDashboardIcon
+                className={pathname === "/" ? "text-secondary" : "text-white"}
+              />
               Dashboard
             </Button>
           </Link>
@@ -70,7 +72,9 @@ const SidebarDashboard = () => {
               size="lg"
               variant={pathname === "/transactions" ? "default" : "ghost"}
             >
-              <ArrowRightLeftIcon />
+              <ArrowRightLeftIcon
+                className={pathname === "/transactions" ? "text-secondary" : "text-white"}
+              />
               Transações
             </Button>
           </Link>

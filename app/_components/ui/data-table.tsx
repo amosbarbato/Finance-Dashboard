@@ -16,7 +16,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id} className="grid grid-cols-[25%_15%_15%_15%_15%_15%] ">
+            <TableRow key={headerGroup.id} className="grid grid-cols-[25%_15%_15%_15%_15%_15%]">
               {headerGroup.headers.map((header) => {
                 return (
                   <TableHead key={header.id} className="font-bold flex items-center">
@@ -38,6 +38,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
+                className="grid grid-cols-[25%_15%_15%_15%_15%_15%]"
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>
