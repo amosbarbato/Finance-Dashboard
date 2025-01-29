@@ -4,6 +4,7 @@ import { DataTable } from "../_components/ui/data-table"
 import { db } from "../_lib/prisma";
 import { transactionColumns } from "./_columns"
 import { redirect } from "next/navigation";
+import { ScrollArea } from "../_components/ui/scroll-area";
 
 const TransactionPage = async () => {
   const { userId } = await auth()
@@ -25,10 +26,12 @@ const TransactionPage = async () => {
         <AddTransaction variant="outline" />
       </div>
 
-      <DataTable
-        columns={transactionColumns}
-        data={JSON.parse(JSON.stringify(transactions))}
-      />
+      <ScrollArea>
+        <DataTable
+          columns={transactionColumns}
+          data={JSON.parse(JSON.stringify(transactions))}
+        />
+      </ScrollArea>
     </div>
   )
 }
