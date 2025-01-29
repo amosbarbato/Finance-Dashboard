@@ -59,7 +59,7 @@ const SidebarDashboard = () => {
               variant={pathname === "/" ? "default" : "ghost"}
             >
               <LayoutDashboardIcon
-                className={pathname === "/" ? "text-secondary" : "text-white"}
+                className={pathname === "/" ? "text-secondary" : "text-primary"}
               />
               Dashboard
             </Button>
@@ -73,7 +73,7 @@ const SidebarDashboard = () => {
               variant={pathname === "/transactions" ? "default" : "ghost"}
             >
               <ArrowRightLeftIcon
-                className={pathname === "/transactions" ? "text-secondary" : "text-white"}
+                className={pathname === "/transactions" ? "text-secondary" : "text-primary"}
               />
               Transações
             </Button>
