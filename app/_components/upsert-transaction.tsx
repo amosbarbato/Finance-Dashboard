@@ -71,6 +71,8 @@ const UpsertDialog = ({ isOpen, setIsOpen, defaultValues, transactionId }: Dialo
     }
   };
 
+  const isUpdate = Boolean(transactionId)
+
   return (
     <Dialog
       open={isOpen}
@@ -83,7 +85,9 @@ const UpsertDialog = ({ isOpen, setIsOpen, defaultValues, transactionId }: Dialo
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Nova transação</DialogTitle>
+          <DialogTitle>
+            {isUpdate ? "Atualizar" : "Criar"} transação
+          </DialogTitle>
         </DialogHeader>
 
         <Form {...form}>
@@ -227,7 +231,9 @@ const UpsertDialog = ({ isOpen, setIsOpen, defaultValues, transactionId }: Dialo
               <DialogClose asChild>
                 <Button type="button" variant="outline" className="rounded-full w-full">Cancelar</Button>
               </DialogClose>
-              <Button type="submit" className="rounded-full w-full">Adicionar</Button>
+              <Button type="submit" className="rounded-full w-full">
+                {isUpdate ? "Atualizar" : "Adicionar"}
+              </Button>
             </DialogFooter>
           </form>
         </Form>
