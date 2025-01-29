@@ -5,6 +5,8 @@ import { db } from "../_lib/prisma";
 import { transactionColumns } from "./_columns"
 import { redirect } from "next/navigation";
 import { ScrollArea } from "../_components/ui/scroll-area";
+import { SidebarProvider } from "../_components/ui/sidebar";
+import SidebarDashboard from "../_components/sidebar";
 
 const TransactionPage = async () => {
   const { userId } = await auth()
@@ -19,20 +21,26 @@ const TransactionPage = async () => {
   });
 
   return (
-    <div className="space-y-6">
-      <div className="flex w-full items-center justify-between">
-        <h1 className="text-2xl font-bold">Transações</h1>
+    <SidebarProvider>
+      <SidebarDashboard />
 
-        <AddTransaction variant="outline" />
-      </div>
+      <main className="bg-gray-100 w-full p-8">
+        <div className="space-y-6">
+          <div className="flex w-full items-center justify-between">
+            <h1 className="text-2xl font-bold">Transações</h1>
 
-      <ScrollArea>
-        <DataTable
-          columns={transactionColumns}
-          data={JSON.parse(JSON.stringify(transactions))}
-        />
-      </ScrollArea>
-    </div>
+            <AddTransaction variant="outline" />
+          </div>
+
+          <ScrollArea>
+            <DataTable
+              columns={transactionColumns}
+              data={JSON.parse(JSON.stringify(transactions))}
+            />
+          </ScrollArea>
+        </div>
+      </main>
+    </SidebarProvider>
   )
 }
 

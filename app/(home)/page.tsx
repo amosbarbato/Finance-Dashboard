@@ -7,6 +7,8 @@ import { getDashboard } from "../_data/get-dashboard"
 import LastTransactions from "../_components/last-transactions"
 import TransactionChart from "../_components/transaction-chart"
 import ExpensesPerCategory from "../_components/expenses-per-category"
+import { SidebarProvider } from "../_components/ui/sidebar"
+import SidebarDashboard from "../_components/sidebar"
 
 interface HomeProps {
   searchParams: Promise<{
@@ -31,30 +33,36 @@ const Home = async (props: HomeProps) => {
   const dashboard = await getDashboard(month)
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between">
-        <h1 className="text-2xl font-bold">Dashboard</h1>
-        <TimeSelect />
-      </div>
+    <SidebarProvider>
+      <SidebarDashboard />
 
-      <div className="grid grid-cols-[2fr,1fr] gap-6">
+      <main className="bg-gray-100 w-full p-8">
         <div className="space-y-6">
-          <SummaryCards month={month} {...dashboard} />
+          <div className="flex justify-between">
+            <h1 className="text-2xl font-bold">Dashboard</h1>
+            <TimeSelect />
+          </div>
 
-          <div className="grid grid-cols-[1fr,2fr] gap-6">
-            <TransactionChart {...dashboard} />
+          <div className="grid grid-cols-[2fr,1fr] gap-6">
+            <div className="space-y-6">
+              <SummaryCards month={month} {...dashboard} />
 
-            <ExpensesPerCategory
-              expensesPerCategory={dashboard.totalExpensePerCategory}
+              <div className="grid grid-cols-[1fr,2fr] gap-6">
+                <TransactionChart {...dashboard} />
+
+                <ExpensesPerCategory
+                  expensesPerCategory={dashboard.totalExpensePerCategory}
+                />
+              </div>
+            </div>
+
+            <LastTransactions
+              lastTransactions={dashboard.lastTransactions}
             />
           </div>
         </div>
-
-        <LastTransactions
-          lastTransactions={dashboard.lastTransactions}
-        />
-      </div>
-    </div>
+      </main>
+    </SidebarProvider>
   )
 }
 
