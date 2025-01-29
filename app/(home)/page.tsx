@@ -5,6 +5,7 @@ import SummaryCards from "../_components/summary-cards"
 import TimeSelect from "../_components/time-select"
 import { getDashboard } from "../_data/get-dashboard"
 import LastTransactions from "../_components/last-transactions"
+import TransactionChart from "../_components/transaction-chart"
 
 interface HomeProps {
   searchParams: Promise<{
@@ -36,11 +37,17 @@ const Home = async (props: HomeProps) => {
       </div>
 
       <div className="grid grid-cols-[2fr,1fr] gap-6">
-        <div>
+        <div className="space-y-6">
           <SummaryCards month={month} {...dashboard} />
+
+          <div className="grid grid-cols-2 gap-6">
+            <TransactionChart {...dashboard} />
+          </div>
         </div>
 
-        <LastTransactions lastTransactions={dashboard.lastTransactions} />
+        <LastTransactions
+          lastTransactions={JSON.parse(JSON.stringify(dashboard.lastTransactions))}
+        />
       </div>
     </div>
   )
