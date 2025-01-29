@@ -2,7 +2,7 @@
 
 import { Pie, PieChart } from "recharts"
 import { Card, CardContent } from "./ui/card"
-import { ChartConfig, ChartContainer } from "./ui/chart"
+import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "./ui/chart"
 import { TransactionType } from "@prisma/client";
 import { TransactionPercentagePerType } from "../_data/get-dashboard/types";
 import PercentageItem from "./percentage-item";
@@ -46,10 +46,17 @@ const TransactionChart = ({ typesPercentage, depositsTotal, investmentsTotal, ex
   ]
 
   return (
-    <Card className="bg-primary">
-      <CardContent className="flex gap-6 pt-6">
-        <ChartContainer config={chartConfig} className="min-h-40 w-1/2">
+    <Card className="bg-primary flex flex-col py-4">
+      <CardContent className="flex-1 pb-3">
+        <ChartContainer
+          config={chartConfig}
+          className="mx-auto aspect-square max-h-[250px]"
+        >
           <PieChart accessibilityLayer data={chartData}>
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
             <Pie
               data={chartData}
               dataKey="amount"
@@ -61,7 +68,7 @@ const TransactionChart = ({ typesPercentage, depositsTotal, investmentsTotal, ex
           </PieChart>
         </ChartContainer>
 
-        <div className="w-full flex flex-col justify-evenly">
+        <div className="space-y-3">
           <PercentageItem
             fill={chartConfig[TransactionType.DEPOSIT].color}
             title="Receita"
