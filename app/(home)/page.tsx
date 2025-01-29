@@ -44,12 +44,14 @@ const Home = async (props: HomeProps) => {
           <div className="grid grid-cols-[1fr,2fr] gap-6">
             <TransactionChart {...dashboard} />
 
-            <ExpensesPerCategory expensesPerCategory={dashboard.totalExpensePerCategory} />
+            <ExpensesPerCategory
+              expensesPerCategory={dashboard.totalExpensePerCategory}
+            />
           </div>
         </div>
 
         <LastTransactions
-          lastTransactions={JSON.parse(JSON.stringify(dashboard.lastTransactions))}
+          lastTransactions={dashboard.lastTransactions}
         />
       </div>
     </div>
