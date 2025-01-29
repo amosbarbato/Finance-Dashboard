@@ -3,6 +3,8 @@ import { auth } from "@clerk/nextjs/server"
 import { isMatch } from "date-fns"
 import SummaryCards from "../_components/summary-cards"
 import TimeSelect from "../_components/time-select"
+import { getDashboard } from "../_data/get-dashboard"
+import LastTransactions from "../_components/last-transactions"
 
 interface HomeProps {
   searchParams: Promise<{
@@ -24,6 +26,8 @@ const Home = async (props: HomeProps) => {
     redirect("?month=01")
   }
 
+  const dashboard = await getDashboard(month)
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between">
@@ -31,7 +35,13 @@ const Home = async (props: HomeProps) => {
         <TimeSelect />
       </div>
 
-      <SummaryCards month={month} />
+      <div className="grid grid-cols-[2fr,1fr] gap-6">
+        <div>
+          <SummaryCards month={month} {...dashboard} />
+        </div>
+
+        <LastTransactions lastTransactions={dashboard.lastTransactions} />
+      </div>
     </div>
   )
 }
